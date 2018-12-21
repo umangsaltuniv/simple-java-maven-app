@@ -31,12 +31,6 @@ pipeline {
                 }
             }
         }
-		 stage('Docker') {
-            steps {
-                sh 'docker build -t friendlyhello .'
-				sh 'docker run -p 4000:80 friendlyhello'
-            }
-        }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
