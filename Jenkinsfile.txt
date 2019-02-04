@@ -13,8 +13,9 @@ pipeline {
 				withSonarQubeEnv ('My SonarQube Server')
 				{
 				sh "${scannerHome}/bin/sonar-scanner"
-            }
-        }
+				}
+			}
+		}
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
