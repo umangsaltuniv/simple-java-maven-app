@@ -36,7 +36,7 @@ public class ITHtmlUnitBrowser {
 		String actualTitle = driver.getTitle();
 		assertEquals(expectedTitle, actualTitle);
         System.out.println(actualTitle);
-		System.out.println("Hello");
+		
 	}
      
         @Test
