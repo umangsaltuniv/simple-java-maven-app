@@ -10,7 +10,7 @@ pipeline {
 		stage('Static Code Analysis') {
             
 			tools {
-                sonarQube 'SonarQube Scanner 2.8'
+                sonarQube 'sonar-scanner'
 				}
 			steps {
 				withSonarQubeEnv('My SonarQube Server')
