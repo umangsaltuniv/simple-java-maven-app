@@ -7,6 +7,12 @@ pipeline {
     }
     stages {
 	
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+		
 		stage('Static Code Analysis') {
             steps {
                 def scannerhome = tool 'sonar-scanner';
@@ -16,11 +22,7 @@ pipeline {
 				}
 			}
 		}
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
