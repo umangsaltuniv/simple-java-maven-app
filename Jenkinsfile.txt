@@ -9,8 +9,10 @@ pipeline {
 	
 		stage('Static Code Analysis') {
             steps {
-                def scannerhome = tool 'sonar-Scanner';
-				withSonarQubeEnv ('SonarQubeServer')
+                def scannerhome = tool 'sonar-scanner';
+				withSonarQubeEnv ('My SonarQube Server')
+				{
+				sh "${scannerHome}/bin/sonar-scanner"
             }
         }
         stage('Build') {
