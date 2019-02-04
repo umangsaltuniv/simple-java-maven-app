@@ -6,6 +6,13 @@ pipeline {
         }
     }
     stages {
+	
+		stage('Static Code Analysis') {
+            steps {
+                def scannerhome = tool 'sonar-Scanner';
+				withSonarQubeEnv ('SonarQubeServer')
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
