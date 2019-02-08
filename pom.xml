@@ -30,7 +30,6 @@
   </dependencies>
   <build>
     <plugins>
-	
       <plugin>
         <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
@@ -46,27 +45,6 @@
           </archive>
         </configuration>
       </plugin>
-    
-	<groupId>org.jacoco</groupId>
- <artifactId>jacoco-maven-plugin</artifactId>
- <version>0.8.1-SNAPSHOT</version>
-</plugin>
-
-
- <reporting>
- 
- 
- <groupId>org.jacoco</groupId>
- <artifactId>jacoco-maven-plugin</artifactId>
- <reportSets>
- <reportSet>
- <reports>
- <report>report</report>
- </reports>
- </reportSet>
- </reportSets>
- </plugin>
-	
-	</plugins>
+    </plugins>
   </build>
 </project>
