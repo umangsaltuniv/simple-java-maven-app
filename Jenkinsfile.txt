@@ -7,28 +7,28 @@ pipeline {
     }
     stages {
 	
-		stage('Static Code Analysis') {
-            steps {
-			 script {
-          scannerHome = tool 'sonar-scanner'
-        }
-				withSonarQubeEnv('My SonarQube Server')
-				{
-				sh "${scannerHome}/bin/sonar-scanner"
-				}
-			}
-		}
+		#stage('Static Code Analysis') {
+        #    steps {
+		#	 script {
+        # scannerHome = tool 'sonar-scanner'
+        #}
+		#		withSonarQubeEnv('My SonarQube Server')
+		#		{
+		#		sh "${scannerHome}/bin/sonar-scanner"
+		#		}
+		#	}
+		#}
 		
-		stage('Code Coverage') {
-			steps {
-				step([$class: 'JacocoPublisher', 
-				execPattern: 'target/*.exec',
-				classPattern: 'target/classes',
-				sourcePattern: 'src/main/java',
-				exclusionPattern: 'src/test*'
-					])
-				}
-		}
+		#stage('Code Coverage') {
+		#	steps {
+		#		step([$class: 'JacocoPublisher', 
+		#		execPattern: 'target/*.exec',
+		#		classPattern: 'target/classes',
+		#		sourcePattern: 'src/main/java',
+		#		exclusionPattern: 'src/test*'
+		#			])
+		#		}
+		#}
 		
         stage('Build') {
             steps {
