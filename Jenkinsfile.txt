@@ -19,17 +19,6 @@ pipeline {
 			}
 		}
 		
-		stage('Code Coverage') {
-			steps {
-				step([$class: 'JacocoPublisher', 
-				execPattern: 'target/*.exec',
-				classPattern: 'target/classes',
-				sourcePattern: 'src/main/java',
-				exclusionPattern: 'src/test*'
-					])
-				}
-		}
-		
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -45,6 +34,19 @@ pipeline {
                 }
             }
         }
+		
+		stage('Code Coverage') {
+			steps {
+				step([$class: 'JacocoPublisher', 
+				execPattern: 'target/*.exec',
+				classPattern: 'target/classes',
+				sourcePattern: 'src/main/java',
+				exclusionPattern: 'src/test*'
+					])
+				}
+		}
+		
+		
 		stage('SystemTest') {
             steps {
 				sh 'mvn -Dtest=ITHtmlUnitBrowser test'
