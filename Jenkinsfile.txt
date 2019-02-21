@@ -9,11 +9,12 @@ pipeline {
 	
 		stage('Artifactory configuration') {
             steps {
-                
+                step([
 				def server = Artifactory.server 'ART'
 				buildInfo = Artifactory.newBuildInfo()
 				buildInfo.env.capture = true
-            }
+				])
+			}
         }
 	
         stage('Build') {
