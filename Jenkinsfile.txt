@@ -9,11 +9,13 @@ pipeline {
 	
 		stage('Artifactory configuration') {
             steps {
-                step(
+                step([
 				def server = Artifactory.server 'ART'
-				buildInfo = Artifactory.newBuildInfo()
-				buildInfo.env.capture = true
-				)
+				def buildInfo = Artifactory.newBuildInfo()
+				server.download spec: downloadSpec, buildInfo: buildInfo
+				server.upload spec: uploadSpec, buildInfo: buildInfo
+				server.publishBuildInfo buildInfo
+				])
 			}
         }
 	
