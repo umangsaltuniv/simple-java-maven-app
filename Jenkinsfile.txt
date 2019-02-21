@@ -8,7 +8,7 @@ pipeline {
     stages {
 	
 	
-		tage('Static Code Analysis') {
+		stage('Static Code Analysis') {
             steps {
 			 script {
           scannerHome = tool 'sonar-scanner'
