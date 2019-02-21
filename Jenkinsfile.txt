@@ -20,16 +20,13 @@ pipeline {
 			}
 	}
 		
-		stage('Code Coverage') {
-			steps {
-				step([$class: 'JacocoPub', 
-				execPattern: 'target/*.exec',
-				classPattern: 'target/classes',
-				sourcePattern: 'src/main/java',
-				exclusionPattern: 'src/test*'
-					])
-				}
-		}	
+		
+	
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
 		
 		stage('Artifactory configuration') {
             steps {
@@ -39,12 +36,8 @@ pipeline {
 				])
 			}
         }
-	
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
+		
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
