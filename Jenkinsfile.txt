@@ -11,7 +11,7 @@ pipeline {
             steps {
                 step([
 				def server = Artifactory.server 'ART'
-				def buildInfo = Artifactory.newBuildInfo()
+				buildInfo = Artifactory.newBuildInfo()
 				server.download spec: downloadSpec, buildInfo: buildInfo
 				server.upload spec: uploadSpec, buildInfo: buildInfo
 				server.publishBuildInfo buildInfo
