@@ -9,11 +9,11 @@ pipeline {
 	
 		stage('Artifactory configuration') {
             steps {
-                step([
+                node('master'){
 				def server = Artifactory.server 'ART'
 				buildInfo = Artifactory.newBuildInfo()
 				server.publishBuildInfo buildInfo
-				])
+				}
 			}
         }
 	
