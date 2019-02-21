@@ -7,6 +7,12 @@ pipeline {
     }
     stages {
 	
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+		
 		stage('Artifactory configuration') {
             steps {
                 step([
@@ -15,12 +21,7 @@ pipeline {
 				])
 			}
         }
-	
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
