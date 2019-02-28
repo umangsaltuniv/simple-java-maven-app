@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package test.java.com.mycompany.app;
 
 import static org.junit.Assert.*;
 
@@ -18,16 +18,16 @@ public class ITHtmlUnitBrowser {
 	public void setUp() throws Exception {
 	driver = new HtmlUnitDriver();
 	}
-/*
-	@Test
+
+	/*@Test
 	public void test1() {
-		driver.get("http://localhost:9090");
-		String expectedTitle = "Welcome";
+		driver.get("http://localhost:8080/MyDemoProject/html/StudentInfo.html");
+		String expectedTitle = "Student Info";
 		String actualTitle = driver.getTitle();
 		assertEquals(expectedTitle, actualTitle);
         System.out.println(actualTitle);
-	}
-*/
+	}*/
+
 
 	@Test
 	public void test2() {
