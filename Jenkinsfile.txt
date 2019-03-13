@@ -32,7 +32,15 @@ pipeline {
             }
         }
 		
-			stage('Code Coverage') {
+		
+		stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+				sh 'echo *******build******'
+            }
+        }
+				
+					stage('Code Coverage') {
 			steps {
 				step([$class: 'JacocoPub', 
 				execPattern: 'target/*.exec',
@@ -42,13 +50,6 @@ pipeline {
 					])
 				}
 		}
-		
-		stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-				sh 'echo *******build******'
-            }
-        }
 				
 		stage('Artifactory configuration') {
             steps {
