@@ -40,12 +40,14 @@ pipeline {
 				sourcePattern: 'src/main/java',
 				exclusionPattern: 'src/test*'
 					])
+					sh 'echo *******codecoverage******'
 				}
 		}	
 		
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
+				sh 'echo *******build******'
             }
         }
 		
@@ -55,12 +57,14 @@ pipeline {
 				def server = Artifactory.server 'ART'
 				server.publishBuildInfo buildInfo
 				])
+				sh 'echo *******artifactory******'
 			}
         }
 	
 		stage('SystemTest') {
             steps {
 				sh 'mvn -Dtest=ITHtmlUnitBrowser test'
+				sh 'echo *******systemtest******'
             }
             post {
                 always {
@@ -71,6 +75,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
+				sh 'echo *******deliver******'
             }
         }
 		
