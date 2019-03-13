@@ -47,7 +47,6 @@ pipeline {
 				sourcePattern: 'src/main/java',
 				exclusionPattern: 'src/test*'
 					])
-				sh 'echo *******codecoverage******'
 				}
 		}
 		
