@@ -50,14 +50,20 @@ pipeline {
             }
         }
 				
-		stage('Artifactory configuration') {
-            steps {
-                step([
-				def server = Artifactory.server 'ART'
-				server.publishBuildInfo buildInfo
-				])
-				sh 'echo *******artifactory******'
-			}
+	stage('upload') {
+           steps {
+              script { 
+                 def server = Artifactory.server 'ART'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "path/",
+                       "target": "path/"
+                    }]
+                 }"""
+
+                 server.upload(uploadSpec) 
+               }
+            }
         }
 	
 		stage('SystemTest') {
