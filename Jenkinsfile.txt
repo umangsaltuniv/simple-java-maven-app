@@ -8,22 +8,21 @@ pipeline {
     stages {
 	
 	
-		stage('Static Code Analysis') {
-            steps {
-			 script {
-          scannerHome = tool 'sonar-scanner'
-        }
-				withSonarQubeEnv('My SonarQube Server')
-				{
-				sh "${scannerHome}/bin/sonar-scanner"
-				}
-			}
-	}
 		
-		stage('UnitTest') {
+		
+	
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+		
+		
+		
+		
+        stage('UnitTest') {
             steps {
                 sh 'mvn test'
-				sh 'echo *******unittest******'
             }	
             post {
                 always {
@@ -31,46 +30,9 @@ pipeline {
                 }
             }
         }
-		
-		stage('Code Coverage') {
-			steps {
-				step([$class: 'JacocoPub', 
-				execPattern: 'target/*.exec',
-				classPattern: 'target/classes',
-				sourcePattern: 'src/main/java',
-				exclusionPattern: 'src/test*'
-					])
-				}
-		}	
-
-			
-		stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-				
-            }
-        }
-				
-	stage('Artifact Upload') {
-           steps {
-              script { 
-                 def server = Artifactory.server 'ART'
-                 def uploadSpec = """{
-                    "files": [{
-                       "pattern": "path/",
-                       "target": "path/"
-                    }]
-                 }"""
-
-                 server.upload(uploadSpec) 
-               }
-            }
-        }
-	
 		stage('SystemTest') {
             steps {
 				sh 'mvn -Dtest=ITHtmlUnitBrowser test'
-				
             }
             post {
                 always {
@@ -81,7 +43,6 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-				
             }
         }
 		
