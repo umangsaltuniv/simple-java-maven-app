@@ -1,0 +1,24 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <label class="navbar-brand">Expense Tracker</label>
+  
+
+  <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/new-expense">Add Expense <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/expense-list">Expense List</a>
+      </li>
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+    <span style="color: white;" class="mx-2">
+    <i class="fas fa-user"></i></span>
+      <label class="mx-2" style="color: white;" >${user.name}</label>
+     <!--  <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> -->
+      <button type="submit" class="btn btn-danger my-2 my-sm-0"><a href="/logout" style="color: white; text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Logout</a></button>
+    </form>
+  </div>
+</nav>

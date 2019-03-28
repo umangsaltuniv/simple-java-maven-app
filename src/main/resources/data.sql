@@ -1,0 +1,2 @@
+insert into user(id, name, username, password, currency) values(1, 'Admin User', 'admin', '$2a$11$3aAcq5lkPby/IMy/fqYvoOCQqCXEh24zHiVhuTuglx91FfA9kzUWO', 'YEN');
+insert into expense(id, date, expense_head, amount, currency, user_id) values(1, '2019-01-01', 'Taxi', 200.00, 'INR', 1);
