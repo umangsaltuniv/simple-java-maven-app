@@ -8,16 +8,17 @@ pipeline {
     stages {
 	
 	
-		
-		
+		stage('PMD') {
+            steps {
+                sh 'mvn site'
+            }
+        }
 	
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-		
-		
 		
 		
         stage('UnitTest') {
