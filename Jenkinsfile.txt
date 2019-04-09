@@ -43,11 +43,37 @@ pipeline {
             }
         }
 		
-        stage('Deliver') {
+		/*
+		stage('Artifactory') {
+            steps {
+                step([
+				def server = Artifactory.server 'ART'
+				server.publishBuildInfo buildInfo
+				])
+			}
+        }
+		*/
+		
+        stage('War Deploy on Tomcat Server') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+		
+		/*
+		 stage('War Deploy on Test Server') {
+            steps {
+               
+            }
+        }
+		*/
+		
+		stage('System Test') {
+            steps {
+                sh 'mvn -Dtest=SystemTest1_Title.java'
+            }
+        }
+		
 		
     }
 }
