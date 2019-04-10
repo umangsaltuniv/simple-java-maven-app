@@ -10,20 +10,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class MyUserPrincipal implements UserDetails {
 	/**
-	 * This class has been created for security purpose to get data of an user with spring security 
+	 * This class has been created for security purpose to get data of an user with
+	 * spring security
 	 */
 	private static final long serialVersionUID = 1L;
 	private User user;
- 
-    public MyUserPrincipal(User user) {
-        this.user = user;
-    }
-    //...
+
+	public MyUserPrincipal(User user) {
+		this.user = user;
+	}
+	// ...
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		 final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
-	        return authorities;
+		final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
+		return authorities;
 	}
 
 	@Override

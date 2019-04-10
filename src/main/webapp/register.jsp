@@ -18,8 +18,6 @@ body {
 </style>
 </head>
 <body>
-	<!-- <h3>Welcome, Enter The User Details</h3> -->
-
 	<div
 		class="d-flex justify-content-center align-items-center container ">
 		<div class="container">
@@ -32,11 +30,15 @@ body {
 								<h5 class="text-center alert alert-warning">${ErrorText}</h5>
 							</c:if>
 
+							<c:if test="${not empty SuccessText}">
+								<h5 class="text-center alert alert-success">${SuccessText} <a href="/login.jsp">Login</a> </h5>
+							</c:if>
+							
 
 							<div class="Absolute-Center is-Responsive">
 
 								<form:form method="POST" modelAttribute="User"
-									action="/add-user">
+									action="/add-user" name="registerForm" id="registerForm">
 									
 									<div class="row my-5">
 										<div class="col-md-3 field-label-responsive">
@@ -44,7 +46,7 @@ body {
 										</div>
 										<div class="col-md-3">
 											<div>
-												<form:input type="text" path="name" value="${User.name}" />
+												<form:input type="text" path="name" id="name" value="${User.name}" />
 											</div>
 										</div>
 									</div>
@@ -55,7 +57,7 @@ body {
 										</div>
 										<div class="col-md-3">
 											<div>
-												<form:input type="text" path="username"
+												<form:input type="text" path="username" id="username"
 													value="${User.username}" />
 											</div>
 										</div>
@@ -66,7 +68,7 @@ body {
 										</div>
 										<div class="col-md-3">
 											<div>
-												<form:input type="password" path="password"
+												<form:input type="password" path="password" id="password"
 													value="${User.password}" />
 											</div>
 										</div>
@@ -78,14 +80,13 @@ body {
 										</div>
 										<div class="col-md-3">
 											<div>
-												<form:select class="form-control" path="currency"
+												<form:select class="form-control" path="currency" id="currency"
 													value="${User.currency}" >
 													<option value="INR" selected>INR</option>
 													<option value="USD">USD</option>
 													<option value="YEN">YEN</option>
 													<option value="EUR">EUR</option>
 												</form:select>
-												<%-- 	<form:input path="currency" value="${User.currency}"  /> --%>
 											</div>
 										</div>
 									</div>
@@ -98,7 +99,6 @@ body {
 										</div>
 										<div class="col-4"></div>
 									</div>
-
 								</form:form>
 							</div>
 						</div>

@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -40,15 +41,27 @@ public class ExpenseControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 
-	@WithMockUser(value = "spring")
-	@Test
-	public void testGetExpense() throws Exception {
-
-		mockMvc.perform(get("/expense-list")).andExpect(status().isOk()).andExpect(view().name("expenseList.jsp"))
-				.andExpect(forwardedUrl("expenseList.jsp"))
-				.andExpect(model().attribute("expeseList", Matchers.hasSize(2)));
-	}
-
+	
+	  @WithMockUser(value = "spring")
+	  
+	  @Test public void testGetExpense() throws Exception {
+	  
+	  mockMvc.perform(get("/expense-list")).andExpect(status().isOk()).andExpect(
+	  view().name("expenseList.jsp")) .andExpect(forwardedUrl("expenseList.jsp"))
+	  .andExpect(model().attribute("expeseList", Matchers.hasSize(2))); }
+	 
+	//Make this @Test to run failing test
+	
+	  @WithMockUser(value = "spring")
+	  
+	  @Ignore
+	  public void negativeTestGetExpense() throws Exception {
+	  
+	  mockMvc.perform(get("/expense-list")).andExpect(status().isOk()).andExpect(
+	  view().name("expenseList.jsp")) .andExpect(forwardedUrl("expenseList.jsp"))
+	  .andExpect(model().attribute("expeseList", Matchers.hasSize(3))); }
+	  
+	
 	@Before
 	public void setUp() {
 		User user = new User();

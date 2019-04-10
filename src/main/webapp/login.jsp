@@ -4,20 +4,32 @@
 <%@ include file="link.jsp"%>
 <%@ include file="script.jsp"%>
 <style>
-
-body { 
-  /* The image used */
-  background-image: url("${pageContext.request.contextPath}/images/bank-notes.jpg");
-
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+body {
+	/* The image used */
+	background-image:
+		url("${pageContext.request.contextPath}/images/bank-notes.jpg");
+	/* Full height */
+	height: 100%;
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 </style>
+<script type="text/javascript">
+	window.setTimeout(function() {
+		$("#logoutAlert").fadeTo(500, 0).slideUp(500, function() {
+			$(this).remove();
+		});
+	}, 2000);
+	
+	window.setTimeout(function() {
+		$("#invalidCredential").fadeTo(500, 0).slideUp(500, function() {
+			$(this).remove();
+		});
+	}, 2000);
+	
+</script>
 </head>
 <body>
 	<div
@@ -29,8 +41,18 @@ body {
 						<div class="card-body">
 							<h3 class="card-title text-center mt-2 mb-5">Expense Tracker</h3>
 							<div class="Absolute-Center is-Responsive">
-								<c:if test="${not empty error}">
-									<div class="error">${error}</div>
+								<c:if test="${param.error != null}">
+									
+									<div id="invalidCredential" class="alert alert-danger">
+										<a id="linkClose" href="#" class="close">&times;</a> <strong>Incorrect Username or Password</strong>
+									</div>
+									
+								</c:if>
+
+								<c:if test="${param.logout != null}">
+									<div id="logoutAlert" class="alert alert-success">
+										<a id="linkClose" href="#" class="close">&times;</a> <strong>User is logged-out successfully.</strong>
+									</div>
 								</c:if>
 
 								<c:url value="/login" var="login" />
@@ -50,18 +72,17 @@ body {
 
 									</div>
 									<div class="form-group">
-										
-											
-															<div class="row">
+
+
+										<div class="row">
 											<div class="col-3">
 												<label>Password:</label>
 											</div>
 											<div class="col-9">
-												 <input type="password"
-											name="password">
+												<input type="password" name="password">
 											</div>
 										</div>
-										
+
 
 									</div>
 									<div class="row">
@@ -75,7 +96,8 @@ body {
 
 											<!-- <input type="submit" name="submit"
 											class="btn btn-success btn-lg" value="Register" /> -->
-											<a class="btn btn-secondary btn-md btn-block" href="/add-user">Register</a>
+											<a class="btn btn-secondary btn-md btn-block"
+												href="/add-user">Register</a>
 
 										</div>
 									</div>

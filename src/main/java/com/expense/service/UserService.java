@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.expense.entity.User;
 
-// Service layer exposes business operations that could be composed of multiple CRUD operation
+
 public interface UserService {
 	public void saveUser(List<User> userList);
 

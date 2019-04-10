@@ -9,49 +9,43 @@ import org.springframework.stereotype.Component;
 import com.expense.dto.ExpenseDTO;
 import com.expense.entity.Expense;
 
-/*Expense mapper class implemented all required method from ModelMapper class
- * so that we can implement this class in controller class without hard coding it repeatedly
- * */
+/*
+ * Data Transfer Object to Entity and vice versa mapping
+ */
 @Component
-public class ExpenseMapper{
-	
+public class ExpenseMapper {
+
 	@Autowired
-    private ModelMapper modelMapper;
-	
-	/*this method gives stored data from model to modeldto
-	 * Here data will transfer from expense to expensedto
+	private ModelMapper modelMapper;
+
+	/*
+	 * Entity to DTO
 	 */
 	public ExpenseDTO modelToDTOMap(Expense model) {
 		return modelMapper.map(model, ExpenseDTO.class);
 	}
-	
-	/*this method gives stored data from modeldto to model
-	 * Here data will transfer from expensedto expense object
+
+	/*
+	 * DTO to Entity
 	 */
 
 	public Expense dtoToModelMap(ExpenseDTO dto) {
 		return modelMapper.map(dto, Expense.class);
 	}
 
-	/*this method gives stored data from model to modeldto
-	 * Here list of data will transfer from expense to expensedto
+	/*
+	 * Entity list to DTO list
 	 */
 	public List<ExpenseDTO> modelToDTOList(List<Expense> modelList) {
-		return modelList.stream()
-				.map(material -> modelToDTOMap(material))
-				.collect(Collectors.toList());
+		return modelList.stream().map(material -> modelToDTOMap(material)).collect(Collectors.toList());
 	}
-	
 
-	/*this method gives stored data from modeldto to model
-	 * Here list of data will transfer from expensedto expense object
+	/*
+	 * DTO List to Entity
 	 */
-	
-	public List<Expense> dtoToModelList(List<ExpenseDTO> dtoList) {
-		return dtoList.stream()
-				.map(materialDTO -> dtoToModelMap(materialDTO))
-				.collect(Collectors.toList());
-	}
 
+	public List<Expense> dtoToModelList(List<ExpenseDTO> dtoList) {
+		return dtoList.stream().map(materialDTO -> dtoToModelMap(materialDTO)).collect(Collectors.toList());
+	}
 
 }

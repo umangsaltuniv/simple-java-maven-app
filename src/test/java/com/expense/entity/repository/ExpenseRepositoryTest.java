@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.List;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,17 @@ public class ExpenseRepositoryTest {
 
 	}
 
+	//Make this @Test to run failing test
+	
+	@Ignore
+	public void testNegative() {
+
+		List<Expense> getExpenses = expenceRepository.findByExpenseHead("Test-Taxi");
+
+		assertThat(getExpenses.size(), is(2));
+
+	}
+	
 	@Before
 	public void getExpense() {
 

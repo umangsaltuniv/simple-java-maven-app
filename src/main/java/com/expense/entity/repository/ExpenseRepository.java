@@ -10,17 +10,13 @@ import org.springframework.data.repository.query.Param;
 import com.expense.entity.Expense;
 import com.expense.entity.User;
 
-//repository interface and an implementation to access our Expense domain objects from an in-memory database.
+//repository interface and an implementation to access Expense domain objects from an in-memory database.
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 	public List<Expense> findByExpenseHead(String name);
 
 	public List<Expense> findByUser(User user);
 	
-	/*
-	 * @Modifying annotation is used to enhance the 
-	 * @Query annotation to execute not only SELECT queries but also INSERT, UPDATE, DELETE, and even DDL queries(non-Javadoc)
-	 * @see org.springframework.data.repository.CrudRepository#deleteById(java.lang.Object)
-	 */
+	// it delete the expense from Expense list
 
 	@Modifying
 	@Query("delete from Expense where id = :id ")

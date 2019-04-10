@@ -9,11 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.expense.entity.User;
 import com.expense.service.UserService;
 
-/*This UserController class and its action method handles incoming browser requests, retrieves necessary model data 
- * and returns appropriate responses*/
+/* Controller to handle creating new user registration */
 @Controller
 public class UserController {
 
@@ -23,8 +24,7 @@ public class UserController {
 	UserService userService;
 
 	/*
-	 * This method used to create a blank user registration list so that we can
-	 * enter data using post mapping
+	 * Open registration page
 	 */
 	@GetMapping("/add-user")
 	public String showForm(Model model) {
@@ -35,10 +35,10 @@ public class UserController {
 	}
 
 	/*
-	 * This method used to enter data for registration page
+	 * Save User 
 	 */
 
-	@PostMapping(value = "/add-user")
+	@PostMapping("/add-user")
 	public String submit(@Valid @ModelAttribute("User") User user, BindingResult result, Model model) {
 
 		log.info("Incoming user: " + user);
@@ -59,10 +59,11 @@ public class UserController {
 		User savedUser = userService.save(user);
 
 		log.info("saved user " + savedUser);
-
-		User principal = userService.getDefaultUser();
-
-		return "login.jsp";
+		
+		model.addAttribute("User", savedUser);
+		model.addAttribute("SuccessText", "User is registered successfully.");
+		
+		return "register.jsp";
 	}
 
 }

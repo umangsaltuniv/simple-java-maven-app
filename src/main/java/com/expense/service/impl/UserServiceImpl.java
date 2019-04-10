@@ -12,7 +12,7 @@ import com.expense.entity.User;
 import com.expense.entity.repository.UserRepository;
 import com.expense.service.UserService;
 
-//in this class we implemented all required business logics
+//Service implementation with business logic and access repository
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getOne(userId);
 	}
 
-	// In this method we can get user by their password. We use this method only for
-	// testing else it is impossible to get data by password.
+	// In this method we can get user by their password. 
+	
 	@Override
 	public User getByPassword(String password) {
 		return userRepository.findByPassword(password);
@@ -56,9 +56,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/*
-	 * We used this method to save users and their passwords. Then by using password
-	 * encoder it converts password from a literal text format into a humanly
-	 * unreadable sequence of characters
+	 * this method saves users and their passwords. Then by using password
+	 * encoder it converts password from a literal text to bCrypt encoded text
 	 */
 	@Override
 	public User save(User user) {
@@ -68,8 +67,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/*
-	 * This method will show default user list in JSP page It will only happen when
-	 * user will be wanted to edit an existing list
+	 * get current logged in user
 	 */
 	@Override
 	public User getDefaultUser() {

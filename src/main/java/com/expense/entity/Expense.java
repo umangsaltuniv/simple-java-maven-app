@@ -12,9 +12,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/*This is a simple Expense bean with basic user information
- *  along with getters, setters, and a toString method.
- *  It stores all defined attribute data of an user*/
+/*
+ * Expense Entity
+ * 
+ */
 
 @Entity
 @Table(name="Expense")

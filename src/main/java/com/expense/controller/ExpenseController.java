@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.expense.dto.ExpenseDTO;
 import com.expense.entity.Expense;
 import com.expense.entity.User;
@@ -32,23 +34,18 @@ public class ExpenseController {
 
 	// ---------------------------
 
-	/*
-	 * These get and post mappings have been implemented for the further
-	 * modification of database like add new expenses, edit an existing data and
-	 * delete data from database
-	 */
-
-	// It will map to the home.jsp page
+	//Open Home page
 	@GetMapping("/expense-home")
-	public String getHomePage() {
+	public String getHomePage(Model model) {
 
 		log.info(" processing to home page");
+		User user = userService.getDefaultUser();
+		model.addAttribute("user", user);
 		return "home.jsp";
 	}
 
 	/*
-	 * This mapping will show default list of expenses of an user and also add the
-	 * new expense list created by the user
+	 * Serve list of expenses of the user
 	 */
 	@GetMapping("/expense-list")
 	public String getExpenseList(Model model) {
@@ -63,8 +60,8 @@ public class ExpenseController {
 		return "expenseList.jsp";
 	}
 
-	// It will map to the newExpense.jsp page to creating new expense list for the
-	// user
+	// Show newExpense.jsp to create expense
+	
 	@GetMapping("/new-expense")
 	public String addNewExpense(Model model) {
 		User user = userService.getDefaultUser();
@@ -74,10 +71,12 @@ public class ExpenseController {
 		log.info("expenseDTO: " + expenseDTO);
 		model.addAttribute("user", user);
 		model.addAttribute("Expense", expenseDTO);
+		
 		return "newExpense.jsp";
 	}
 
-	// here after getting list of expenses, we can edit an existing expense data
+	// edit an expense
+	
 	@GetMapping("/edit/{id}")
 	public String editExpense(@PathVariable("id") Long expenseId, Model model) {
 
@@ -92,9 +91,7 @@ public class ExpenseController {
 	}
 
 	/*
-	 * This mapping is for storing list of expense data of an user after clicking on
-	 * submit botton first it will check expense id if expense id will match then
-	 * only it will go for further processing
+	 * Save Expense
 	 */
 	@PostMapping("/submit-form")
 	public String submitForm(@ModelAttribute("Expense") ExpenseDTO expenseDTO, Model model) {
@@ -105,19 +102,24 @@ public class ExpenseController {
 			Expense expense = expenseService.getById(expenseDTO.getId());
 			expense = expenseMapper.dtoToModelMap(expenseDTO);
 			expenseService.saveExpense(expense);
+			model.addAttribute("SuccessText", " Expense List is edited successfully.");
 		} else {
 			log.info("New");
 			Expense expense = mapDTOToModel(expenseDTO);
 			expenseService.saveExpense(expense);
+			model.addAttribute("SuccessText", " Expense List is added successfully.");
 		}
-		return "redirect:/expense-list";
+		
+		log.info("add new expense: " + expenseDTO);
+		//return "redirect:/new-expense";
+		User user = userService.getDefaultUser();
+		model.addAttribute("user", user);
+		model.addAttribute("Expense", expenseDTO);
+		return "/newExpense.jsp";
 	}
 
 	/*
-	 * this method is used for getting all data of an entity by creating
-	 * corresponding dto of an entity here ExpenseDTO is the corresponding dto for
-	 * an Expense class where it can store data of an Expense class and also can get
-	 * data from an Expense class
+	 * get Expense Object for the passed Expense DTO (Data Transfer Object)
 	 */
 
 	private Expense mapDTOToModel(ExpenseDTO expenseDTO) {
@@ -129,9 +131,10 @@ public class ExpenseController {
 		return expense;
 	}
 
-	// This mapping will delete an unused data from repository
+	// Delete expense
+	
 	@GetMapping("/delete/{id}")
-	public String deleteExpense(@PathVariable("id") Long expenseId) {
+	public String deleteExpense(@PathVariable("id") Long expenseId, RedirectAttributes redirectAttributes) {
 		log.info("expenseId : " + expenseId);
 		if (expenseId != null) {
 			expenseService.deleteById(expenseId);
@@ -142,16 +145,10 @@ public class ExpenseController {
 		} else {
 			return "Something went wrong !";
 		}
+		
+		redirectAttributes.addFlashAttribute("msg", "Expense List is deleted successfully.");
 		return "redirect:/expense-list";
 	}
 
-	// This mapping is for logout
-	@GetMapping("/logout")
-	public String logoutPage() {
-
-		return "redirect:/login?logout";
-	}
-	// You can redirect wherever you want, but generally it's a good practice to
-	// show login screen again.
-
+	
 }

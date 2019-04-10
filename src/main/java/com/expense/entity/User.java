@@ -15,8 +15,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/*This is a simple User bean with basic user information
- *  along with getters, setters, and a toString method.*/
+/*
+ * User Entity
+ * 
+ * */
 @Entity
 @Table(name="USER")
 public class User {
@@ -101,7 +103,7 @@ public class User {
 	}
 	
 	
-	/*@JsonIgnore or @JsonIgnoreProperties simply hides the field from the Jackson parser. 
+	/*It simply hides the field from the Jackson parser. 
 	here we used to test the controller class which gives an output in json format*/
 	@Column
 	@OneToMany(mappedBy = "user",fetch = FetchType.EAGER,   cascade = CascadeType.ALL) // This annotation used for one to many mapping

@@ -20,8 +20,18 @@ body {
 				<div class="col-sm-9 col-md-7 col-md-5 mx-auto">
 					<div class="card card-signin my-5">
 						<div class="card-body">
-							<h3 class="card-title text-center">Manage Expense</h3>
+							<h3 class="card-title text-center">
+								<c:if test="${not empty Expense.id}">Edit Expense</c:if> 
+								<c:if test="${empty Expense.id}">New Expense</c:if>
+							</h3>
 							<div class="Absolute-Center is-Responsive">
+							
+							
+							<c:if test="${not empty SuccessText}">
+								<h5 class="text-center alert alert-success">${SuccessText} <a href="/expense-list">Expense List</a> </h5>
+							</c:if>
+							
+							
 								<form:form class="form-horizontal" method="post"
 									modelAttribute="Expense" id="submitForm"
 									action="${pageContext.request.contextPath}/submit-form">

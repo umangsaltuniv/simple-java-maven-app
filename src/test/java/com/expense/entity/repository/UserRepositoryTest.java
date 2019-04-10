@@ -3,6 +3,7 @@ package com.expense.entity.repository;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,18 @@ public class UserRepositoryTest {
 		User getUserName = userRepository.findByName("xxxxx");
 
 		assertEquals("save succssful", "xxxxx", (getUserName.getName()));
+
+	}
+	
+	
+	//Make this @Test to run failing test
+	
+	@Ignore
+	public void negativeTest() {
+
+		User getUserName = userRepository.findByName("xxxxx");
+
+		assertEquals("save succssful", "#####", (getUserName.getName()));
 
 	}
 

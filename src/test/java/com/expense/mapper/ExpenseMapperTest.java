@@ -1,6 +1,8 @@
 package com.expense.mapper;
 
 import static org.junit.Assert.*;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;
 import com.expense.dto.ExpenseDTO;
@@ -32,6 +34,20 @@ public class ExpenseMapperTest {
 		assertEquals(dto.getIsRecurring(), expense.getIsRecurring());
 		assertEquals(dto.getIsSelected(), expense.getIsSelected());
 		assertEquals(dto.getDetails(), expense.getDetails());
+
+	}
+	
+	//Make this @Test to run failing test
+	
+	@Ignore
+	public void negativeTest() {
+
+		ExpenseDTO dto = new ExpenseDTO();
+		dto.setDate("23-01-1994");
+		
+		Expense expense = modelMapper.map(dto, Expense.class);
+		assertEquals(dto.getExpenseHead(), expense.getDate());
+	
 
 	}
 

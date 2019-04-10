@@ -1,33 +1,29 @@
 package com.expense.dto;
 
 public class ExpenseDTO {
-	
-	
+
 	private Long id;
 
-	   
 	private String date;
-	   
+
 	private String expenseHead;
-	   
+
 	private Double amount;
-	   
+
 	private String currency;
-	   
+
 	private String expenseCategory;
-	   
+
 	private Integer isRecurring;
-	   
+
 	private Integer isSelected;
-	   
+
 	private String details;
 
-    private Long userId;
-
-	
+	private Long userId;
 
 	public ExpenseDTO() {
-		
+
 	}
 
 	public Long getId() {
@@ -116,11 +112,5 @@ public class ExpenseDTO {
 				+ ", currency=" + currency + ", expenseCategory=" + expenseCategory + ", isRecurring=" + isRecurring
 				+ ", isSelected=" + isSelected + ", details=" + details + "]";
 	}
-    
-    
-    
-    
+
 }
-	
-	
-	
