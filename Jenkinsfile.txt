@@ -14,12 +14,14 @@ pipeline {
             }
         }
 	
+	/*
         stage('Clean') {
             steps {
                 sh 'mvn clean'
             }
         }
-		
+	*/
+	
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
