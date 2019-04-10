@@ -8,12 +8,6 @@ pipeline {
     stages {
 	
 	
-		stage('PMD') {
-            steps {
-                sh 'mvn site'
-            }
-        }
-	
 	/*
         stage('Clean') {
             steps {
@@ -21,6 +15,12 @@ pipeline {
             }
         }
 	*/
+	
+		stage('PMD') {
+            steps {
+                sh 'mvn site'
+            }
+        }
 	
         stage('UnitTest') {
             steps {
