@@ -37,6 +37,7 @@ public class ExpenseRepositoryTest {
 
 	//Make this @Test to run failing test
 	
+	 
 	@Ignore
 	public void testNegative() {
 
@@ -50,7 +51,7 @@ public class ExpenseRepositoryTest {
 	public void getExpense() {
 
 		User user = new User();
-		user.setUsername("aaaa");
+		user.setUsername("aaaaaa");
 		user.setPassword("xxxxx");
 		user.setName("Uthkrusta");
 		user.setCurrency("rs");

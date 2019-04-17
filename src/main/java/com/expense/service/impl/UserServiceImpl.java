@@ -1,6 +1,7 @@
 package com.expense.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	// This method is used to save all users
+
 	@Override
-	public void saveUser(List<User> userList) {
-		userRepository.saveAll(userList);
+	public List<User> saveAllUser(List<User> userList) {
+		return userRepository.saveAll(userList);
 	}
 
 	// This method is to get list of users
@@ -42,8 +44,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.getOne(userId);
 	}
 
-	// In this method we can get user by their password. 
-	
+	// In this method we can get user by their password.
+
 	@Override
 	public User getByPassword(String password) {
 		return userRepository.findByPassword(password);
@@ -56,14 +58,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/*
-	 * this method saves users and their passwords. Then by using password
-	 * encoder it converts password from a literal text to bCrypt encoded text
+	 * this method saves users and their passwords. Then by using password encoder
+	 * it converts password from a literal text to bCrypt encoded text
 	 */
-	@Override
-	public User save(User user) {
 
+	@Override
+	public User saveUser(User user) {
+		// Uncomment below line to make test fail
+		// user.setUsername("Uth");
+		// return user;
+
+		// Comment this line and uncomment above two line to fail the test
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
+
 	}
 
 	/*
@@ -89,4 +97,5 @@ public class UserServiceImpl implements UserService {
 
 		return user;
 	}
+
 }

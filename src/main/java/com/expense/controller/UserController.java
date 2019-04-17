@@ -45,22 +45,21 @@ public class UserController {
 
 		if (userService.getByUsername(user.getUsername()) != null) {
 			log.info("User already exist redirecting");
-			model.addAttribute("ErrorText", "User already exist!");
+			model.addAttribute("ErrorText", "User is already exist!");
 			User userNew = new User();
 			model.addAttribute("User", userNew);
 			return "register.jsp";
-			// return "redirect:/add-user";
 		}
 		if (result.hasErrors()) {
-			return "error";
+			return "register.jsp";
 		}
 		log.info("user page: " + user);
 
-		User savedUser = userService.save(user);
+		User savedUser = userService.saveUser(user);
 
 		log.info("saved user " + savedUser);
 		
-		model.addAttribute("User", savedUser);
+		model.addAttribute("User", new User());
 		model.addAttribute("SuccessText", "User is registered successfully.");
 		
 		return "register.jsp";

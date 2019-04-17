@@ -6,7 +6,7 @@ import com.expense.entity.User;
 
 
 public interface UserService {
-	public void saveUser(List<User> userList);
+	public List<User> saveAllUser(List<User> userList);
 
 	public List<User> getUser();
 
@@ -16,7 +16,7 @@ public interface UserService {
 
 	public User getByUsername(String username);
 	
-	public User save(User user);
+	public User saveUser(User user);
 	
 	public User getDefaultUser();
 

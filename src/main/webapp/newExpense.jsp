@@ -10,7 +10,28 @@
 body { 
 	background-color:#dcddd3
 }
+
+.required {
+  color: red;
+}
 </style>
+
+ <script type = "text/javascript">
+ function validate()
+ {
+	 var date = document.getElementById("date");
+	 var expenseHead = document.getElementById("expenseHead");
+	 var amount = document.getElementById("amount");
+	 
+	 if(date.value == ""|| expenseHead.value ==""|| amount.value=="")
+	 	{
+		 alert("Please enter mandatory fields");
+		 return false;
+		}
+ }
+ 
+</script>
+
 </head>
 <body>
 	<div
@@ -26,35 +47,34 @@ body {
 							</h3>
 							<div class="Absolute-Center is-Responsive">
 							
-							
 							<c:if test="${not empty SuccessText}">
-								<h5 class="text-center alert alert-success">${SuccessText} <a href="/expense-list">Expense List</a> </h5>
+								<h5 class="text-center alert alert-success">${SuccessText}</h5>
 							</c:if>
 							
-							
-								<form:form class="form-horizontal" method="post"
+				
+								<form:form class="form-horizontal" method="post" onsubmit="return validate()" 
 									modelAttribute="Expense" id="submitForm"
 									action="${pageContext.request.contextPath}/submit-form">
 
 									<div class="row my-5">
 										<div class="col-sm-5 field-label-responsive">
-											<label for="name">Date:</label>
+											<label for="date">Date<span class="required">*</span></label>
 										</div>
 										<div class="col-md-5">
 											<div>
-												<form:input type="date" path="date" value="${Expense.date}" />
+												<form:input type="date" id= "date" path="date" value="${Expense.date}" />
 											</div>
 										</div>
 									</div>
 
 									<div class="row my-5">
 										<div class="col-sm-5 field-label-responsive">
-											<label for="name">ExpenseHead:</label>
+											<label for="expenseHead">ExpenseHead<span class="required">*</span></label>
 										</div>
 										<div class="col-md-5">
 											<div>
 
-												<form:select class="form-control" path="expenseHead"
+												<form:select class="form-control" path="expenseHead" id= "expenseHead"
 													value="${Expense.expenseHead}">
 													<form:option value="Taxi" label="Taxi" />
 													<form:option value="Meal" label="Meal" />
@@ -68,11 +88,11 @@ body {
 
 									<div class="row my-5">
 										<div class="col-sm-5 field-label-responsive">
-											<label for="name">Amount:</label>
+											<label for="amount">Amount<span class="required">*</span></label>
 										</div>
 										<div class="col-md-5">
 											<div>
-												<form:input type="number" path="amount"
+												<form:input type="number" path="amount" id="amount" min="1" max="100000"
 													value="${Expense.amount}" />
 											</div>
 										</div>

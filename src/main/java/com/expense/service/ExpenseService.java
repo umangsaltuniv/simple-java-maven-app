@@ -7,7 +7,7 @@ import com.expense.entity.User;
 
 
 public interface ExpenseService {
-	public void saveExpense(Expense expense);
+	public Expense saveExpense(Expense expense);
 
 	public List<Expense> getExpense();
 

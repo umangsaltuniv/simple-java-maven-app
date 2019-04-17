@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -70,8 +72,6 @@ public class Expense {
 		this.id = id;
 	}
 	
-
-	
 	@Column
 	public String getDate() {
 		return date;
@@ -79,6 +79,7 @@ public class Expense {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 	
 	@Column
 	public String getExpenseHead() {

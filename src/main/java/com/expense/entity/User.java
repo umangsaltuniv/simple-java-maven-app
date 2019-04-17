@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -71,14 +74,16 @@ public class User {
 	}
 	
 	@Column
+	@Size(min=5)
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	@Column
+	@Size(min=5)
 	public String getPassword() {
 		return password;
 	}
@@ -87,6 +92,7 @@ public class User {
 	}
 	
 	@Column
+	@Size(min=5)
 	public String getName() {
 		return name;
 	}
@@ -94,6 +100,7 @@ public class User {
 		this.name = name;
 	}
 	
+
 	@Column
 	public String getCurrency() {
 		return currency;

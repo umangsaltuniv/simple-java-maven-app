@@ -73,6 +73,7 @@ public class ExpenseController {
 		model.addAttribute("Expense", expenseDTO);
 		
 		return "newExpense.jsp";
+		
 	}
 
 	// edit an expense
@@ -111,11 +112,11 @@ public class ExpenseController {
 		}
 		
 		log.info("add new expense: " + expenseDTO);
-		//return "redirect:/new-expense";
 		User user = userService.getDefaultUser();
 		model.addAttribute("user", user);
-		model.addAttribute("Expense", expenseDTO);
+		model.addAttribute("Expense", new ExpenseDTO());
 		return "/newExpense.jsp";
+		
 	}
 
 	/*

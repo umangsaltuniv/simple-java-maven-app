@@ -1,17 +1,22 @@
 package com.expense.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.expense.controller.ExpenseController;
 import com.expense.entity.Expense;
 import com.expense.entity.User;
 import com.expense.entity.repository.ExpenseRepository;
@@ -19,11 +24,13 @@ import com.expense.service.impl.ExpenseServiceImpl;
 
 public class ExpenseServiceTest {
 
+	Logger log = Logger.getLogger(ExpenseServiceTest.class.getName());
+	
 	@Mock
 	ExpenseRepository expenseRepository;
 
 	@InjectMocks
-	ExpenseServiceImpl expenseServiceImpl;
+	ExpenseService expenseService = new ExpenseServiceImpl();
 
 	@Before
 	public void init() {
@@ -31,40 +38,34 @@ public class ExpenseServiceTest {
 	}
 
 	@Test
-	public void getAllUserTest() {
-		List<Expense> expenseList = new ArrayList<Expense>();
-		User user1 = new User("supriya", "*****", "AAAA", "rs", expenseList);
-		Expense expense1 = new Expense("2016-03-01", "sssss", 678995.97, "rs", "****", 1, 1, "details", user1);
-		Expense expense2 = new Expense("2017-02-21", "rrrrr", 600000.00, "dolar", "@@@@", 1, 0, "detail", user1);
-		Expense expense3 = new Expense("2018-05-22", "tttttt", 200000.00, "rs", "####", 0, 0, "nothing", user1);
+	public void saveExpenseTest() {
+		Expense expense = new Expense();
+		User user1 = new User();
+		expense.setAmount(1000.00);
 
-		expenseList.add(expense1);
-		expenseList.add(expense2);
-		expenseList.add(expense3);
+		when(expenseRepository.save(Mockito.any(Expense.class))).thenReturn(expense);
+		Expense created = expenseService.saveExpense(expense);
 
-		when(expenseServiceImpl.getExpense()).thenReturn(expenseList);
-		List<Expense> expenseList1 = expenseServiceImpl.getExpense();
-		assertEquals(3, expenseList1.size());
+		log.info("created: "+created);
+		assertThat(created.getAmount(), is(1000.00));
 	}
-	
-	
-	//Make this @Test to run failing test
-	
-	@Ignore
-	public void getAllUserNegativeTest() {
-		List<Expense> expenseList = new ArrayList<Expense>();
-		User user1 = new User("supriya", "*****", "AAAA", "rs", expenseList);
-		Expense expense1 = new Expense("2016-03-01", "sssss", 678995.97, "rs", "****", 1, 1, "details", user1);
-		Expense expense2 = new Expense("2017-02-21", "rrrrr", 600000.00, "dolar", "@@@@", 1, 0, "detail", user1);
-		Expense expense3 = new Expense("2018-05-22", "tttttt", 200000.00, "rs", "####", 0, 0, "nothing", user1);
 
-		expenseList.add(expense1);
-		expenseList.add(expense2);
-		expenseList.add(expense3);
+	@Test
+	public void getAllUserTest() {
 
-		when(expenseServiceImpl.getExpense()).thenReturn(expenseList);
-		List<Expense> expenseList1 = expenseServiceImpl.getExpense();
-		assertEquals(4, expenseList1.size());
+		Expense expense = new Expense();
+		User user1 = new User();
+		expense.setAmount(1000.00);
+
+		when(expenseRepository.save(Mockito.any(Expense.class))).thenReturn(expense);
+		Expense created = expenseService.saveExpense(expense);
+
+		ArrayList<Expense> expenseList = new ArrayList<Expense>();
+		expenseList.add(created);
+		when(expenseRepository.findAll()).thenReturn(expenseList);
+
+		List<Expense> expenseList1 = expenseService.getExpense();
+		assertEquals(1, expenseList1.size());
 	}
 
 }

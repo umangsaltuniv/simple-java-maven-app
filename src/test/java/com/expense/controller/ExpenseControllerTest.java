@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.logging.Logger;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -19,10 +21,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import com.expense.ExpenseApplication;
 import com.expense.entity.Expense;
 import com.expense.entity.User;
+import com.expense.entity.repository.ExpenseRepository;
 import com.expense.entity.repository.UserRepository;
 import com.expense.service.ExpenseService;
 
@@ -32,11 +36,16 @@ import com.expense.service.ExpenseService;
 @TestPropertySource(locations = "classpath:application.properties")
 public class ExpenseControllerTest {
 
+	Logger log = Logger.getLogger(ExpenseController.class.getName());
+	
 	@Autowired
 	MockMvc mockMvc;
 
 	@Mock
 	private ExpenseService expenseService;
+	
+	@Autowired
+	private ExpenseRepository expenseRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -44,31 +53,49 @@ public class ExpenseControllerTest {
 	
 	  @WithMockUser(value = "spring")
 	  
-	  @Test public void testGetExpense() throws Exception {
+	  @Test
+	  public void testGetExpense() throws Exception {
 	  
-	  mockMvc.perform(get("/expense-list")).andExpect(status().isOk()).andExpect(
-	  view().name("expenseList.jsp")) .andExpect(forwardedUrl("expenseList.jsp"))
-	  .andExpect(model().attribute("expeseList", Matchers.hasSize(2))); }
+	  ResultActions
+	  resultAction=mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
+	  .andExpect(view().name("expenseList.jsp"))
+	  .andExpect(forwardedUrl("expenseList.jsp"))
+	  .andExpect(model().attribute("expeseList", Matchers.hasSize(2)));
+	  log.info("Positive result action : " + resultAction); }
 	 
-	//Make this @Test to run failing test
+	 
+	// Make this @Test to run failing test
+
 	
 	  @WithMockUser(value = "spring")
 	  
-	  @Ignore
+	 @Ignore
 	  public void negativeTestGetExpense() throws Exception {
 	  
-	  mockMvc.perform(get("/expense-list")).andExpect(status().isOk()).andExpect(
-	  view().name("expenseList.jsp")) .andExpect(forwardedUrl("expenseList.jsp"))
-	  .andExpect(model().attribute("expeseList", Matchers.hasSize(3))); }
+	  ResultActions
+	  resultAction=mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
+	  .andExpect(view().name("expenseList.jsp"))
+	  .andExpect(forwardedUrl("expenseList.jsp"))
+	  .andExpect(model().attribute("expeseList", Matchers.hasSize(3)))
+	  ;
+	  log.info("Negative result action : " + resultAction); 
+	  }
 	  
-	
+	  
+	 
 	@Before
 	public void setUp() {
+		
+		expenseRepository.deleteAll();
+		
+		userRepository.deleteAll();
+		
 		User user = new User();
 		user.setUsername("spring");
 		user.setPassword("xxxxx");
 		user.setName("Uthkrusta");
 		user.setCurrency("rs");
+		log.info("User  : " + user); 
 
 		Expense expense = new Expense();
 		expense.setDate("2016-03-01");
@@ -80,6 +107,7 @@ public class ExpenseControllerTest {
 		expense.setIsSelected(1);
 		expense.setDetails("details");
 		expense.setUser(user);
+		log.info("Expense : " + expense); 
 
 		Expense expense1 = new Expense();
 		expense1.setDate("2015-01-07");
@@ -91,11 +119,15 @@ public class ExpenseControllerTest {
 		expense1.setIsSelected(0);
 		expense1.setDetails("detail");
 		expense1.setUser(user);
+		log.info("Expense1 : " + expense1); 
 
-		user.getExpenseList().add(expense);
+		
+		user.getExpenseList().add(expense); 
 		user.getExpenseList().add(expense1);
+		 
 
 		userRepository.save(user);
+		log.info("User  : " + user); 
 
 	}
 

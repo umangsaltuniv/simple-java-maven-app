@@ -1,6 +1,7 @@
 package com.expense.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 	UserRepository userRepository;
 
 	@Override
-	public void saveExpense(Expense expense) {
-		expenseRepository.save(expense);
+	public Expense saveExpense(Expense expense) {
+		//Uncomment below line to make test fail
+		//expense.setAmount(2000.00);
+		//return expense;
+		
+		//Comment this line and uncomment above two line to fail the test
+		return expenseRepository.save(expense);
 	}
 
 	public List<Expense> getExpense() {
