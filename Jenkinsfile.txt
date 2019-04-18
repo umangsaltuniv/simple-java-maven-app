@@ -14,7 +14,7 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-	
+	/*
 		stage('PMD') {
             steps {
                 sh 'mvn site'
@@ -37,7 +37,7 @@ pipeline {
                 sh 'mvn jacoco:report'
             }
         }
-		
+	*/	
 		stage('Build') {
             steps {
                 sh 'mvn install'
@@ -55,12 +55,14 @@ pipeline {
         }
 		*/
 		
-        stage('War Deploy on Tomcat Server') {
+      /*
+	  stage('War Deploy on Tomcat Server') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
-		
+	*/
+	
 		/*
 		 stage('War Deploy on Test Server') {
             steps {
@@ -68,13 +70,13 @@ pipeline {
             }
         }
 		*/
-		
+		/*
 		stage('System Test') {
             steps {
                 sh 'mvn -Dtest=SystemTest1_Title.java'
             }
         }
-		
+		*/
 		
     }
 }
