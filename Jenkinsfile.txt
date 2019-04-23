@@ -55,13 +55,13 @@ pipeline {
         }
 		*/
 		
-      /*
+      
 	  stage('War Deploy on Tomcat Server') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
-	*/
+	
 	
 		/*
 		 stage('War Deploy on Test Server') {
