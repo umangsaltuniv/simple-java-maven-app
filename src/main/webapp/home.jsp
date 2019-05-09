@@ -22,7 +22,7 @@ body {
 </style>
 </head>
 <body>
-	<%@ include file="index.html"%>
+	<%@ include file="header.jsp"%>
 	<%@ include file="footer.html"%>
 </body>
 </html>

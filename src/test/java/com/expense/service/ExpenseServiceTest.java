@@ -40,7 +40,6 @@ public class ExpenseServiceTest {
 	@Test
 	public void saveExpenseTest() {
 		Expense expense = new Expense();
-		User user1 = new User();
 		expense.setAmount(1000.00);
 
 		when(expenseRepository.save(Mockito.any(Expense.class))).thenReturn(expense);
@@ -54,7 +53,6 @@ public class ExpenseServiceTest {
 	public void getAllUserTest() {
 
 		Expense expense = new Expense();
-		User user1 = new User();
 		expense.setAmount(1000.00);
 
 		when(expenseRepository.save(Mockito.any(Expense.class))).thenReturn(expense);
@@ -67,5 +65,7 @@ public class ExpenseServiceTest {
 		List<Expense> expenseList1 = expenseService.getExpense();
 		assertEquals(1, expenseList1.size());
 	}
+	
+
 
 }

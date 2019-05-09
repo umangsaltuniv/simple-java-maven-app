@@ -1,6 +1,6 @@
 <html>
 <head>
-<%@ include file="index.html"%>
+<%@ include file="header.jsp"%>
 <%@ include file="link.jsp"%>
 <%@ include file="script.jsp"%>
 <title>Add new Expense</title>
@@ -28,6 +28,17 @@ body {
 		 alert("Please enter mandatory fields");
 		 return false;
 		}
+	
+	var dateValue = new Date($('#date').val());
+	 
+	console.log("Year: ", dateValue.getFullYear());
+	
+	if(dateValue.getFullYear() > 9999){
+		{
+			alert("Please enter year less than 9999");
+			return false;
+		}
+	}
  }
  
 </script>
@@ -38,7 +49,9 @@ body {
 		class="d-flex justify-content-center align-items-center container ">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-9 col-md-7 col-md-5 mx-auto">
+				<div class="col-4">
+				</div>
+				<div class="col-4 mx-auto">
 					<div class="card card-signin my-5">
 						<div class="card-body">
 							<h3 class="card-title text-center">
@@ -56,26 +69,26 @@ body {
 									modelAttribute="Expense" id="submitForm"
 									action="${pageContext.request.contextPath}/submit-form">
 
-									<div class="row my-5">
-										<div class="col-sm-5 field-label-responsive">
+									<div class="row my-3">
+										<div class="col-3 field-label-responsive">
 											<label for="date">Date<span class="required">*</span></label>
 										</div>
-										<div class="col-md-5">
+										<div class="col-9">
 											<div>
-												<form:input type="date" id= "date" path="date" value="${Expense.date}" />
+												<form:input type="date" id= "date" path="date" value="${Expense.date}"  style="width:100%"/>
 											</div>
 										</div>
 									</div>
 
-									<div class="row my-5">
-										<div class="col-sm-5 field-label-responsive">
-											<label for="expenseHead">ExpenseHead<span class="required">*</span></label>
+									<div class="row my-3">
+										<div class="col-3 field-label-responsive">
+											<label for="expenseHead">Head<span class="required">*</span></label>
 										</div>
-										<div class="col-md-5">
+										<div class="col-9">
 											<div>
 
 												<form:select class="form-control" path="expenseHead" id= "expenseHead"
-													value="${Expense.expenseHead}">
+													value="${Expense.expenseHead}" style="width:100%">
 													<form:option value="Taxi" label="Taxi" />
 													<form:option value="Meal" label="Meal" />
 													<form:option value="Travel" label="Travel" />
@@ -86,26 +99,26 @@ body {
 										</div>
 									</div>
 
-									<div class="row my-5">
-										<div class="col-sm-5 field-label-responsive">
+									<div class="row my-3">
+										<div class="col-3 field-label-responsive">
 											<label for="amount">Amount<span class="required">*</span></label>
 										</div>
-										<div class="col-md-5">
+										<div class="col-9">
 											<div>
-												<form:input type="number" path="amount" id="amount" min="1" max="100000"
+												<form:input type="number" path="amount" id="amount" min="1" max="100000" step="any" style="width:100%"
 													value="${Expense.amount}" />
 											</div>
 										</div>
 									</div>
 
-									<div class="row my-5">
-										<div class="col-sm-5 field-label-responsive">
+									<div class="row my-3">
+										<div class="col-3 field-label-responsive">
 											<label for="name">Currency:</label>
 										</div>
-										<div class="col-md-5">
+										<div class="col-9">
 											<div>
 												<form:select class="form-control" path="currency"
-													value="${Expense.currency}">
+													value="${Expense.currency}" style="width:100%">
 													<!-- <option value="INR">INR</option>
 													<option value="USD">USD</option>
 													<option value="YEN">YEN</option>
@@ -122,21 +135,23 @@ body {
 
 
 
-									<div class="row my-5">
-										<div class="col-4"></div>
-										<div class="col-4">
+									<div class="row my-3">
+										<div class="col-3"></div>
+										<div class="col-9">
 											<form:input type="hidden" path="userId"
 												value="${Expense.userId}" />
 											<form:input type="hidden" path="id" value="${Expense.id}" />
 											<button type="submit" class="btn btn-primary btn-block">Save</button>
 										</div>
-										<div class="col-4"></div>
+										
 									</div>
 
 								</form:form>
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="col-4">
 				</div>
 			</div>
 		</div>

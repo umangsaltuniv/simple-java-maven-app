@@ -10,9 +10,11 @@ import java.util.logging.Logger;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +23,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import com.expense.ExpenseApplication;
@@ -34,16 +37,17 @@ import com.expense.service.ExpenseService;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = ExpenseApplication.class)
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application.properties")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ExpenseControllerTest {
 
-	Logger log = Logger.getLogger(ExpenseController.class.getName());
-	
+	Logger log = Logger.getLogger(ExpenseControllerTest.class.getName());
+
 	@Autowired
 	MockMvc mockMvc;
 
 	@Mock
 	private ExpenseService expenseService;
-	
+
 	@Autowired
 	private ExpenseRepository expenseRepository;
 
@@ -51,51 +55,63 @@ public class ExpenseControllerTest {
 	private UserRepository userRepository;
 
 	
-	  @WithMockUser(value = "spring")
-	  
-	  @Test
-	  public void testGetExpense() throws Exception {
-	  
-	  ResultActions
-	  resultAction=mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
-	  .andExpect(view().name("expenseList.jsp"))
-	  .andExpect(forwardedUrl("expenseList.jsp"))
-	  .andExpect(model().attribute("expeseList", Matchers.hasSize(2)));
-	  log.info("Positive result action : " + resultAction); }
-	 
-	 
-	// Make this @Test to run failing test
+	@WithMockUser(value = "spring")
+	@Test
+	public void testDeleteExpense() throws Exception {
 
+		
+
+		ResultActions resultAction = mockMvc.perform(get("/delete/1"))
+				// .andExpect(status().isOk())
+				.andExpect(view().name("redirect:/expense-list"))
+//	  .andExpect(forwardedUrl("expenseList.jsp"))
+//	  .andExpect(model().attribute("expeseList", Matchers.hasSize(1)))
+		;
+
+		resultAction = mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
+//				.andExpect(view().name("expenseList.jsp")).andExpect(forwardedUrl("expenseList.jsp"))
+				.andExpect(model().attribute("expeseList", Matchers.hasSize(1)));
+	}
 	
-	  @WithMockUser(value = "spring")
-	  
-	 @Ignore
-	  public void negativeTestGetExpense() throws Exception {
-	  
-	  ResultActions
-	  resultAction=mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
-	  .andExpect(view().name("expenseList.jsp"))
-	  .andExpect(forwardedUrl("expenseList.jsp"))
-	  .andExpect(model().attribute("expeseList", Matchers.hasSize(3)))
-	  ;
-	  log.info("Negative result action : " + resultAction); 
-	  }
-	  
-	  
-	 
+	
+	@WithMockUser(value = "spring")
+	@Test
+	public void testGetExpense() throws Exception {
+
+		ResultActions resultAction = mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
+				.andExpect(view().name("expenseList.jsp")).andExpect(forwardedUrl("expenseList.jsp"))
+				.andExpect(model().attribute("expeseList", Matchers.hasSize(2)));
+		log.info("Positive result action : " + resultAction);
+	}
+
+	// Make this @Test to run failing test
+	
+	//@Test
+	@WithMockUser(value = "spring")
+	@Ignore
+	public void negativeTestGetExpense() throws Exception {
+
+		ResultActions resultAction = mockMvc.perform(get("/expense-list")).andExpect(status().isOk())
+				.andExpect(view().name("expenseList.jsp")).andExpect(forwardedUrl("expenseList.jsp"))
+				.andExpect(model().attribute("expeseList", Matchers.hasSize(3)));
+		log.info("Negative result action : " + resultAction);
+	}
+
+
+
 	@Before
 	public void setUp() {
-		
+
 		expenseRepository.deleteAll();
-		
+
 		userRepository.deleteAll();
-		
+
 		User user = new User();
 		user.setUsername("spring");
 		user.setPassword("xxxxx");
 		user.setName("Uthkrusta");
 		user.setCurrency("rs");
-		log.info("User  : " + user); 
+		log.info("User  : " + user);
 
 		Expense expense = new Expense();
 		expense.setDate("2016-03-01");
@@ -107,7 +123,7 @@ public class ExpenseControllerTest {
 		expense.setIsSelected(1);
 		expense.setDetails("details");
 		expense.setUser(user);
-		log.info("Expense : " + expense); 
+		log.info("Expense : " + expense);
 
 		Expense expense1 = new Expense();
 		expense1.setDate("2015-01-07");
@@ -119,15 +135,13 @@ public class ExpenseControllerTest {
 		expense1.setIsSelected(0);
 		expense1.setDetails("detail");
 		expense1.setUser(user);
-		log.info("Expense1 : " + expense1); 
+		log.info("Expense1 : " + expense1);
 
-		
-		user.getExpenseList().add(expense); 
+		user.getExpenseList().add(expense);
 		user.getExpenseList().add(expense1);
-		 
 
 		userRepository.save(user);
-		log.info("User  : " + user); 
+		log.info("User  : " + user);
 
 	}
 

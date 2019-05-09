@@ -106,6 +106,8 @@ public class ExpenseController {
 			model.addAttribute("SuccessText", " Expense List is edited successfully.");
 		} else {
 			log.info("New");
+			User user = userService.getDefaultUser();
+			expenseDTO.setUserId(user.getId());
 			Expense expense = mapDTOToModel(expenseDTO);
 			expenseService.saveExpense(expense);
 			model.addAttribute("SuccessText", " Expense List is added successfully.");
@@ -136,6 +138,7 @@ public class ExpenseController {
 	
 	@GetMapping("/delete/{id}")
 	public String deleteExpense(@PathVariable("id") Long expenseId, RedirectAttributes redirectAttributes) {
+		log.info("in deleteExpense: "+expenseId);
 		log.info("expenseId : " + expenseId);
 		if (expenseId != null) {
 			expenseService.deleteById(expenseId);

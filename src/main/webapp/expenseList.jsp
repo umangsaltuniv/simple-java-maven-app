@@ -3,12 +3,16 @@
 <title>Expense List data</title>
 <%@ include file="link.jsp"%>
 <%@ include file="script.jsp"%>
-<%@ include file="index.html"%>
+<%@ include file="header.jsp"%>
 
 <style>
 body {
 	background-color: #dcddd3
 }
+
+
+
+
 </style>
 
 <script type="text/javascript">
@@ -24,7 +28,7 @@ body {
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" style="margin-bottom: 30pt;">
 		<h3>Expense List</h3>
 
 		<c:if test="${not empty msg}">
@@ -50,20 +54,19 @@ body {
 						<td>${expense.expenseHead}</td>
 						<td>${expense.amount}</td>
 						<td>${expense.currency}</td>
-						<td align="center">
-							<button type="button" class="btn btn-primary">
-								<a href="${pageContext.request.contextPath}/edit/${expense.id}"><span
-									style="color: white;"><i class="far fa-edit"></i> Edit</span></a>
-							</button>
-							<button id="btnDelete" class="btn btn-danger">
-								<a
-									href="${pageContext.request.contextPath}/delete/${expense.id}"
-									onclick="return confirm(' Confirm! Do you want to delete expense?')"><span
-									style="color: white;"><i class="far fa-trash-alt"></i>
-										Delete</span></a>
-							</button>
-
-						</td>
+						<td align="center"><a
+							href="${pageContext.request.contextPath}/edit/${expense.id}">
+								<button type="button" class="btn btn-primary">
+									<span style="color: white;"><i class="far fa-edit"></i>
+										Edit</span>
+								</button>
+						</a> <a href="${pageContext.request.contextPath}/delete/${expense.id}"
+							onclick="return confirm(' Confirm! Do you want to delete expense?')">
+								<button id="btnDelete" class="btn btn-danger">
+									<span style="color: white;"><i class="far fa-trash-alt"></i>
+										Delete</span>
+								</button>
+						</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

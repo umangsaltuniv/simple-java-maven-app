@@ -74,8 +74,8 @@ public class UserControllerTest {
 	}
 
 	// Make this @Test to run failing test
+	
 
-	 
 	@Ignore
 	public void negativeTestCreateUser() throws Exception {
 
@@ -92,6 +92,8 @@ public class UserControllerTest {
 
 	// Test failure for invalid username
 	// Make this @Test to run failing test
+		
+	
 	  @Ignore
 	  public void testGetUser() throws Exception 
 	  {

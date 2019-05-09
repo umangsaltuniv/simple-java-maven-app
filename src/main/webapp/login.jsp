@@ -32,11 +32,21 @@ body {
 </script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding-right: 0px;">
+	<label class="navbar-brand">Expense Tracker</label>
+	<div style="width: 100%">
+	<img class="rounded float-right" src="${pageContext.request.contextPath}/images/logo.jpg" id="logo"  width="120" >
+	</div>
+
+</nav>
+
 	<div
 		class="d-flex justify-content-center align-items-center container ">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			<div class="col-4">
+				</div>
+				<div class="col-4 mx-auto">
 					<div class="card card-signin my-5">
 						<div class="card-body">
 							<h3 class="card-title text-center mt-2 mb-5">Expense Tracker</h3>
@@ -56,7 +66,7 @@ body {
 								</c:if>
 
 								<c:url value="/login" var="login" />
-								<form:form action="/login" method="post">
+								<form:form action="${pageContext.request.contextPath}/login" method="post">
 
 
 									<div class="form-group">
@@ -65,7 +75,7 @@ body {
 												<label>Username:</label>
 											</div>
 											<div class="col-9">
-												<input type="text" name="username">
+												<input type="text" name="username" style="width:100%">
 											</div>
 										</div>
 
@@ -79,7 +89,7 @@ body {
 												<label>Password:</label>
 											</div>
 											<div class="col-9">
-												<input type="password" name="password">
+												<input type="password" name="password" style="width:100%">
 											</div>
 										</div>
 
@@ -97,7 +107,7 @@ body {
 											<!-- <input type="submit" name="submit"
 											class="btn btn-success btn-lg" value="Register" /> -->
 											<a class="btn btn-secondary btn-md btn-block"
-												href="/add-user">Register</a>
+												href="${pageContext.request.contextPath}/add-user">Register</a>
 
 										</div>
 									</div>
@@ -107,6 +117,8 @@ body {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="col-4">
 				</div>
 			</div>
 		</div>
