@@ -8,13 +8,13 @@ pipeline {
     stages {
 	
 	
-	
+	/*
         stage('Clean') {
             steps {
                 sh 'mvn clean'
             }
         }
-	/*
+	*/
 		stage('PMD') {
             steps {
                 sh 'mvn site'
@@ -37,7 +37,7 @@ pipeline {
                 sh 'mvn jacoco:report'
             }
         }
-	*/	
+		
 		stage('Build') {
             steps {
                 sh 'mvn install'
