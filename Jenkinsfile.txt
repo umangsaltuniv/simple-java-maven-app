@@ -6,13 +6,13 @@ pipeline {
         }
     }
     stages {
-	
+		/*
         stage('Clean') {
             steps {
                 sh 'mvn clean'
             }
         }
-	
+	*/
 		
 		/*	
 		stage('PMD') {
@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-		
+		/*
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPub', 
@@ -43,6 +43,7 @@ pipeline {
 					])
 				}
 		}	
+		*/
 		
 		/*
 		stage('Jacoco') {
