@@ -7,21 +7,32 @@ pipeline {
     }
     stages {
 	
-	
-		/*
         stage('Clean') {
             steps {
                 sh 'mvn clean'
             }
         }
-		*/
+	
+		stage('Static Code Analysis') {
+            steps {
+			 script {
+          scannerHome = tool 'sonar-scanner'
+        }
+				withSonarQubeEnv('My SonarQube Server')
+				{
+				sh "${scannerHome}/bin/sonar-scanner"
+				}
+			}
+		}
 		
+		/*	
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
-	
+		*/
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -33,11 +44,24 @@ pipeline {
             }
         }
 		
+		stage('Jacoco Code Coverage') {
+			steps {
+				step([$class: 'JacocoPub', 
+				execPattern: 'target/*.exec',
+				classPattern: 'target/classes',
+				sourcePattern: 'src/main/java',
+				exclusionPattern: 'src/test*'
+					])
+				}
+		}	
+		
+		/*
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
+		*/
 		
 		stage('Build') {
             steps {
@@ -45,7 +69,7 @@ pipeline {
             }
         }
 		
-		/*
+		
 		stage('Artifactory') {
             steps {
                 step([
@@ -54,27 +78,61 @@ pipeline {
 				])
 			}
         }
-		*/
+		
 		
       
-	  stage('War Deploy on Tomcat Server') {
+	  stage('War deploy on Tomcat server') {
             steps {
 				sh './jenkins/scripts/deliver.sh'
             }
         }
 	
 	
+	
 		/*
-		 stage('War Deploy on Test Server') {
+		 stage('War moved from Dev server and deploy on Test server') {
             steps {
                
             }
         }
 		*/
+		
 		/*
-		stage('System Test') {
+		stage('System Test on Test server') {
             steps {
                 sh 'mvn -Dtest=SystemTest1_Title.java'
+            }
+        }
+		*/
+		
+		/*
+		 stage('War moved from Test server and deploy on Staging server') {
+            steps {
+               
+            }
+        }
+		*/
+		
+		/*
+		stage('Smoke Test on Staging server') {
+            steps {
+                
+            }
+        }
+		*/
+		
+		/*
+		 stage('War moved from Stage server and deploy on Prod server') {
+            steps {
+               
+            }
+        }
+		*/
+		
+		/*
+		stage('Smoke Test on Prod server') {
+            steps {
+            
             }
         }
 		*/
