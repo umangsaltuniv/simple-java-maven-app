@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-		/*
+		
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPub', 
@@ -43,7 +43,7 @@ pipeline {
 					])
 				}
 		}	
-		*/
+		
 		
 		/*
 		stage('Jacoco') {
@@ -73,6 +73,7 @@ pipeline {
 			}
 		}
 		
+		/*
 		stage('Artifactory') {
             steps {
                 step([
@@ -81,7 +82,7 @@ pipeline {
 				])
 			}
         }
-		
+		*/
 		
       
 	  stage('War deploy on Tomcat server') {
