@@ -13,17 +13,6 @@ pipeline {
             }
         }
 	
-		stage('Static Code Analysis') {
-            steps {
-			 script {
-          scannerHome = tool 'sonar-scanner'
-        }
-				withSonarQubeEnv('My SonarQube Server')
-				{
-				sh "${scannerHome}/bin/sonar-scanner"
-				}
-			}
-		}
 		
 		/*	
 		stage('PMD') {
@@ -62,13 +51,26 @@ pipeline {
             }
         }
 		*/
-		
+			
+			
+			
 		stage('Build') {
             steps {
                 sh 'mvn install'
             }
         }
 		
+		stage('Static Code Analysis') {
+            steps {
+			 script {
+          scannerHome = tool 'sonar-scanner'
+        }
+				withSonarQubeEnv('My SonarQube Server')
+				{
+				sh "${scannerHome}/bin/sonar-scanner"
+				}
+			}
+		}
 		
 		stage('Artifactory') {
             steps {
