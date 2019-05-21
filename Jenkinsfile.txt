@@ -33,6 +33,7 @@ pipeline {
             }
         }
 		
+		/*
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPub', 
@@ -43,7 +44,7 @@ pipeline {
 					])
 				}
 		}	
-		
+		*/
 		
 		/*
 		stage('Jacoco') {
