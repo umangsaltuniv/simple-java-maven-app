@@ -101,7 +101,7 @@ pipeline {
 		
 		stage('System Test') {
             steps {
-                sh 'mvn -Dtest=ExpenseManagerSystemTests.java'
+                sh 'mvn -Dtest=/var/jenkins_home/workspace/simple-java-maven-app/src/stest/java/com/expense/tests/ExpenseManagerSystemTests.java'
             }
         }
 		
