@@ -23,6 +23,7 @@ pipeline {
         }
 		*/
 		
+		/*
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -33,6 +34,7 @@ pipeline {
                 }
             }
         }
+		*/
 		
 		/*
 		stage('Jacoco Code Coverage') {
@@ -47,13 +49,13 @@ pipeline {
 		}	
 		*/
 		
-		
+		/*
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-		
+		*/
 			
 			
 			
@@ -63,6 +65,7 @@ pipeline {
             }
         }
 		
+		/*
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -74,6 +77,7 @@ pipeline {
 				}
 			}
 		}
+		*/
 		
 		/*
 		stage('Artifactory') {
