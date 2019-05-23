@@ -1,22 +1,19 @@
 package com.expense.tests;
 
-//import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-//import org.testng.annotations.AfterTest;
-//import org.testng.annotations.BeforeTest;
-//import org.testng.annotations.Test;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ExpenseManagerSystemTest {
  
 WebDriver driver;
 	
-	@Before
+	@BeforeTest
 	public void setUp() throws Exception {
 	driver = new HtmlUnitDriver();
 	}
@@ -31,7 +28,7 @@ WebDriver driver;
 	}
 
 	
-	@After
+	@AfterTest
 	public void tearDown() throws Exception {
 	}
 
