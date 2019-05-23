@@ -200,7 +200,7 @@
 				<version>2.22.0</version>
                 <configuration>
                     <includes>
-                        <include>ExpenseManagerSystemTests.java</include>
+                        <include>ExpenseManagerSystemTest.java</include>
                     </includes>
                 </configuration>
             </plugin>
