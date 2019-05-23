@@ -101,7 +101,7 @@ pipeline {
 		
 		stage('System Test') {
             steps {
-            	sh 'mvn -Dtest=ExpenseManagerSystemTest.java'
+            	sh 'mvn -Dtest=src/stest/java/com/expense/tests/ExpenseManagerSystemTest.java'
             }
         }
 		
