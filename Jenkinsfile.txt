@@ -15,13 +15,13 @@ pipeline {
         }
 		*/
 		
-		/*
+		
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
-		*/
+		
 		
 		
         stage('UnitTest') {
@@ -36,7 +36,7 @@ pipeline {
         }
 		
 		
-		
+		/*
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPub', 
@@ -47,15 +47,15 @@ pipeline {
 					])
 				}
 		}	
+		*/
 		
 		
-		/*
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-		*/	
+			
 			
 		stage('Build') {
             steps {
