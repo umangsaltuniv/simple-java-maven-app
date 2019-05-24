@@ -18,7 +18,7 @@ pipeline {
         }
 		*/
 		
-		
+		/*
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-		
+		*/
 		
 		/*
 		stage('Jacoco Code Coverage') {
@@ -94,6 +94,7 @@ pipeline {
 		/*
 		stage('System Test') {
             steps {
+				git url: 'https://github.com/umangsaltuniv/EMSystemTests.git'
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
