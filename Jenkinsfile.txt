@@ -91,14 +91,14 @@ pipeline {
         }
 	
 		
-		/*
+		
 		stage('System Test') {
             steps {
 				git url: 'https://github.com/umangsaltuniv/EMSystemTests.git'
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
-		*/
+		
 		
     }
 }
