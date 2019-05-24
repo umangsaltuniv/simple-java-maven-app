@@ -10,13 +10,13 @@ pipeline {
         }
 		*/
 		
-		/*
+		
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
-		*/
+		
 		
 		/*
 		stage('Compile') {
