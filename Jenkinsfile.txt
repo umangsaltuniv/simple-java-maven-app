@@ -23,7 +23,7 @@ pipeline {
         }
 		*/
 		
-		/*
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -34,9 +34,9 @@ pipeline {
                 }
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPub', 
@@ -47,7 +47,7 @@ pipeline {
 					])
 				}
 		}	
-		*/
+		
 		
 		/*
 		stage('Jacoco') {
