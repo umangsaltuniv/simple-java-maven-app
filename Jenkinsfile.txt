@@ -15,13 +15,13 @@ pipeline {
         }
 		*/
 		
-		
+		/*
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
-		
+		*/
 		
 		
         stage('UnitTest') {
@@ -49,13 +49,13 @@ pipeline {
 		}	
 		*/
 		
-		
+		/*
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-			
+		*/	
 			
 		stage('Build') {
             steps {
@@ -63,7 +63,7 @@ pipeline {
             }
         }
 		
-		
+		/*
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -75,7 +75,7 @@ pipeline {
 				}
 			}
 		}
-		
+		*/
 		
 		/*
 		stage('Artifactory') {
