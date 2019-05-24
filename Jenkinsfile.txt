@@ -18,6 +18,27 @@ pipeline {
         }
 		*/
 		
+		
+		stage('Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+		
+		
+		stage('Static Code Analysis') {
+            steps {
+			 script {
+          scannerHome = tool 'sonar-scanner'
+        }
+				withSonarQubeEnv('My SonarQube Server')
+				{
+				sh "${scannerHome}/bin/sonar-scanner"
+				}
+			}
+		}
+		
+		
 		/*
         stage('UnitTest') {
             steps {
@@ -51,19 +72,6 @@ pipeline {
             }
         }
 		*/	
-		
-		
-		stage('Static Code Analysis') {
-            steps {
-			 script {
-          scannerHome = tool 'sonar-scanner'
-        }
-				withSonarQubeEnv('My SonarQube Server')
-				{
-				sh "${scannerHome}/bin/sonar-scanner"
-				}
-			}
-		}
 		
 		
 		stage('Build') {
