@@ -51,14 +51,8 @@ pipeline {
             }
         }
 		*/	
-			
-		stage('Build') {
-            steps {
-                sh 'mvn install -DskipTests'
-            }
-        }
 		
-		/*
+		
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -70,7 +64,14 @@ pipeline {
 				}
 			}
 		}
-		*/
+		
+		
+		stage('Build') {
+            steps {
+                sh 'mvn install -DskipTests'
+            }
+        }
+		
 		
 		/*
 		stage('Artifactory') {
