@@ -26,4 +26,3 @@ set -x
 #JENKINS_NODE_COOKIE=dontKillMe 
 #echo $JENKINS_NODE_COOKIE
 java -jar target/${NAME}-${VERSION}.war &
-sleep 10
