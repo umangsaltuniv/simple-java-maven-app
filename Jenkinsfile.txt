@@ -93,8 +93,8 @@ pipeline {
       
 	  stage('War deploy on Tomcat server') {
             steps {
-				sh './jenkins/scripts/deliver.sh'
-				sh 'JENKINS_NODE_COOKIE=dontKillMe ./deliver.sh'
+				//sh './jenkins/scripts/deliver.sh'
+				sh 'JENKINS_NODE_COOKIE=dontKillMe ./jenkins/scripts/deliver.sh'
             }
         }
 	
