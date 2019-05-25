@@ -97,6 +97,7 @@ pipeline {
 	  stage('War deploy on Tomcat server') {
             steps {
 				sh './jenkins/scripts/deliver.sh'
+				sh 'BUILD_ID=dontKillMe ./deliver.sh'
             }
         }
 	
