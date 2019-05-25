@@ -23,6 +23,6 @@ set +x
 echo 'The following command runs and outputs the execution of your Java'
 echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 set -x
-#JENKINS_NODE_COOKIE=dontKillMe 
-#echo $JENKINS_NODE_COOKIE
+JENKINS_NODE_COOKIE=dontKillMe 
+echo $JENKINS_NODE_COOKIE
 java -jar target/${NAME}-${VERSION}.war &
