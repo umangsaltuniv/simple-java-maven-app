@@ -2,31 +2,31 @@ pipeline {
     agent any
     stages {
 		
-		/*
+		
         stage('Clean') {
             steps {
                 sh 'mvn clean'
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -38,7 +38,7 @@ pipeline {
 				}
 			}
 		}
-		*/
+		
 		
 		
         stage('UnitTest') {
@@ -52,13 +52,13 @@ pipeline {
             }
         }
 		
-		/*
+		
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-		*/	
+			
 		
 		
 		stage('Jacoco Code Coverage') {
@@ -70,9 +70,6 @@ pipeline {
 					])
 				}
 		}	
-		
-		
-		
 		
 		
 		stage('Build') {
