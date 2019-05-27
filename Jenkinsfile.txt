@@ -10,23 +10,23 @@ pipeline {
         }
 		*/
 		
-		/*
+		
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -38,9 +38,9 @@ pipeline {
 				}
 			}
 		}
-		*/
 		
-		/*
+		
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -51,17 +51,17 @@ pipeline {
                 }
             }
         }
-		*/
 		
-		/*
+		
+		
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-		*/	
+			
 		
-		/*
+		
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPublisher', 
@@ -71,7 +71,7 @@ pipeline {
 					])
 				}
 		}	
-		*/
+		
 		
 		stage('Build') {
             steps {
