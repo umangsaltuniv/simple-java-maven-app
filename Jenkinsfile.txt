@@ -2,15 +2,15 @@ pipeline {
     agent any
     stages {
 		
-		
+		/*
         stage('Clean') {
             steps {
                 sh 'mvn clean'
             }
         }
+		*/
 		
-		
-		
+		/*
 		stage('PMD') {
             steps {
                 sh 'mvn site'
@@ -71,7 +71,7 @@ pipeline {
 					])
 				}
 		}	
-		
+		*/
 		
 		stage('Build') {
             steps {
@@ -107,14 +107,14 @@ pipeline {
         }
 	
 		
-		/*
+		
 		stage('System Test') {
             steps {
 				git url: 'https://github.com/umangsaltuniv/EMSystemTests.git'
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
-		*/
+		
 		
 		/*
 		stage('Back') {
