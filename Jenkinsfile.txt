@@ -79,6 +79,12 @@ pipeline {
             }
         }
 		
+		stage('Tomcat server up') {
+            steps {
+                sh '/tmp/apache-tomcat-9.0.20/bin/sh startup.sh'
+            }
+        }
+		
 		
 		/*
 		stage('Artifactory') {
@@ -102,7 +108,6 @@ pipeline {
 	  stage('War deploy on Tomcat server') {
             steps {
 				sh './jenkins/scripts/deliver.sh'
-				//sh 'JENKINS_NODE_COOKIE=dontKillMe ./jenkins/scripts/deliver.sh'
             }
         }
 	
