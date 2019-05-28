@@ -10,7 +10,6 @@ pipeline {
         }
 		
 		
-		/*
 		stage('PMD') {
             steps {
                 sh 'mvn site'
@@ -18,13 +17,11 @@ pipeline {
         }
 		
 		
-		
 		stage('Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-		
 		
 		
 		stage('Static Code Analysis') {
@@ -40,8 +37,7 @@ pipeline {
 		}
 		
 		
-		
-        stage('UnitTest') {
+        stage('Unit Test') {
             steps {
                 sh 'mvn test'
             }	
@@ -53,25 +49,11 @@ pipeline {
         }
 		
 		
-		
-		stage('Jacoco') {
+		stage('JaCoCo') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-		*/	
-		
-		/*
-		stage('Jacoco Code Coverage') {
-			steps {
-				step([$class: 'JacocoPublisher', 
-				execPattern: 'target/jacoco.exec',
-				classPattern: 'target/classes',
-				sourcePattern: 'src/main/java',
-					])
-				}
-		}	
-		*/
 		
 		
 		stage('Build') {
@@ -81,40 +63,18 @@ pipeline {
         }
 		
 		
-		
-		stage('Tomcat server up') {
+		stage('Tomcat Server Up') {
             steps {
                 sh '/tmp/apache-tomcat-9.0.20/bin/startup.sh'
             }
         }
-		
-		
-		/*
-		stage('Artifactory') {
-            steps {
-                step([
-				def server = Artifactory.server 'ART'
-				server.publishBuildInfo buildInfo
-				])
-			}
-        }
-		*/
 	
 		
-		stage('War moved to tomcat server location') {
+		stage('War Moved To Tomcat Server Location') {
             steps {
                 sh 'cp /var/jenkins_home/workspace/simple-java-maven-app/target/ExpenseApp-1.war /tmp/apache-tomcat-9.0.20/webapps'
             }
         }
-		
-	 
-		/*
-		stage('War deploy on Tomcat server') {
-            steps {
-				sh './jenkins/scripts/deliver.sh'
-            }
-        }
-		*/
 		
 		
 		stage('System Test') {
@@ -126,9 +86,8 @@ pipeline {
 		
 		
 		/*
-		stage('Back') {
+		stage('Back to Expense Manager App GitHub Repository') {
             steps {
-				echo "Back to GitHub"
 				git url: 'https://github.com/umangsaltuniv/simple-java-maven-app.git'
             	
             }
