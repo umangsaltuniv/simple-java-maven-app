@@ -53,15 +53,15 @@ pipeline {
         }
 		
 		
-		
+		/*
 		stage('Jacoco') {
             steps {
                 sh 'mvn jacoco:report'
             }
         }
-			
+		*/	
 		
-		/*
+		
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPublisher', 
@@ -71,7 +71,7 @@ pipeline {
 					])
 				}
 		}	
-		*/
+		
 		
 		/*
 		stage('Build') {
