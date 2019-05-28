@@ -10,23 +10,23 @@ pipeline {
         }
 		
 		
-		
+		/*
 		stage('PMD') {
             steps {
                 sh 'mvn site'
             }
         }
+		*/
 		
-		
-		
+		/*
 		stage('Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
+		*/
 		
-		
-		
+		/*
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -38,9 +38,9 @@ pipeline {
 				}
 			}
 		}
+		*/
 		
-		
-		
+		/*
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         }
-		
+		*/
 		
 		
 		stage('Jacoco') {
@@ -73,11 +73,13 @@ pipeline {
 		}	
 		*/
 		
+		/*
 		stage('Build') {
             steps {
                 sh 'mvn install -DskipTests'
             }
         }
+		*/
 		
 		/*
 		stage('Tomcat server up') {
@@ -106,21 +108,22 @@ pipeline {
         }
 		*/
 	 
+		/*
 		stage('War deploy on Tomcat server') {
             steps {
 				sh './jenkins/scripts/deliver.sh'
             }
         }
-	
+		*/
 		
-		
+		/*
 		stage('System Test') {
             steps {
 				git url: 'https://github.com/umangsaltuniv/EMSystemTests.git'
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
-		
+		*/
 		
 		/*
 		stage('Back') {
