@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <head>
 <title>Expense List data</title>
 <%@ include file="link.jsp"%>
