@@ -18,13 +18,13 @@ pipeline {
         }
 		*/
 		
-		
+		/*
 		stage('Compile') {
             steps {
                 sh 'mvn compile'
             }
         }
-		
+		*/
 		
 		/*
 		stage('Static Code Analysis') {
@@ -40,7 +40,7 @@ pipeline {
 		}
 		*/
 		
-		/*
+		
         stage('UnitTest') {
             steps {
                 sh 'mvn test'
@@ -51,7 +51,7 @@ pipeline {
                 }
             }
         }
-		*/
+		
 		
 		
 		stage('Jacoco') {
