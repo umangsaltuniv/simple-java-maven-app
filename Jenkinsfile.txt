@@ -104,7 +104,7 @@ pipeline {
                 sh 'cp /var/jenkins_home/workspace/simple-java-maven-app/target/ExpenseApp-1.war /tmp/apache-tomcat-9.0.20/webapps'
             }
         }
-     
+		*/
 	 
 		stage('War deploy on Tomcat server') {
             steps {
@@ -120,7 +120,7 @@ pipeline {
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
-		*/
+		
 		
 		/*
 		stage('Back') {
