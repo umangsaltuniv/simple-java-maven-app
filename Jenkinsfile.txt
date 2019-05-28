@@ -10,7 +10,7 @@ pipeline {
         }
 		*/
 		
-		/*
+		
 		stage('PMD') {
             steps {
                 sh 'mvn site'
@@ -61,7 +61,7 @@ pipeline {
         }
 			
 		
-		
+		/*
 		stage('Jacoco Code Coverage') {
 			steps {
 				step([$class: 'JacocoPublisher', 
@@ -79,12 +79,13 @@ pipeline {
             }
         }
 		
+		/*
 		stage('Tomcat server up') {
             steps {
                 sh '/tmp/apache-tomcat-9.0.20/bin/startup.sh'
             }
         }
-		
+		*/
 		
 		/*
 		stage('Artifactory') {
@@ -97,7 +98,7 @@ pipeline {
         }
 		*/
 	
-	
+		/*
 		stage('War moved to tomcat server location') {
             steps {
                 sh 'cp /var/jenkins_home/workspace/simple-java-maven-app/target/ExpenseApp-1.war /tmp/apache-tomcat-9.0.20/webapps'
@@ -119,7 +120,7 @@ pipeline {
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
-		
+		*/
 		
 		/*
 		stage('Back') {
