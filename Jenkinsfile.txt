@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
 		
-		/*
+		
         stage('Clean') {
             steps {
                 sh 'mvn clean'
@@ -22,7 +22,6 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-		*/
 		
 		/*
 		stage('Static Code Analysis') {
@@ -56,7 +55,7 @@ pipeline {
             }
         }
 		
-		/*
+		
 		stage('Build') {
             steps {
                 sh 'mvn install -DskipTests'
@@ -84,7 +83,7 @@ pipeline {
             	sh 'mvn -Dtest=ExpenseManagerSystemTest test'
             }
         }
-		*/
+		
 		
 		/*
 		stage('Back to Expense Manager App GitHub Repository') {
