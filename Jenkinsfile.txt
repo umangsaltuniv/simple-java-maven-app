@@ -23,7 +23,7 @@ pipeline {
             }
         }
 		
-		
+		/*
 		stage('Static Code Analysis') {
             steps {
 			 script {
@@ -35,7 +35,7 @@ pipeline {
 				}
 			}
 		}
-		
+		*/
 		
         stage('Unit Test') {
             steps {
